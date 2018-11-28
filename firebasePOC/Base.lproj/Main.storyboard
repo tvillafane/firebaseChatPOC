@@ -56,6 +56,12 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error logging in" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D2P-Rt-SQw">
+                                <rect key="frame" x="129" y="89" width="116.5" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="0.1705181274" blue="0.16471555230000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -66,7 +72,9 @@
                             <constraint firstItem="oGX-8t-s3A" firstAttribute="leading" secondItem="bDT-yL-426" secondAttribute="leading" id="Mdc-e5-TfH"/>
                             <constraint firstItem="FWM-8y-IbT" firstAttribute="top" secondItem="oGX-8t-s3A" secondAttribute="bottom" constant="15" id="Nh4-HS-Bk3"/>
                             <constraint firstItem="lKo-Gc-bIU" firstAttribute="centerY" secondItem="bDT-yL-426" secondAttribute="centerY" id="Sc9-iH-omV"/>
+                            <constraint firstItem="D2P-Rt-SQw" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="25" id="Zyh-EM-c4C"/>
                             <constraint firstItem="bDT-yL-426" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="70" id="cYI-DI-k20"/>
+                            <constraint firstItem="D2P-Rt-SQw" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="eyE-qg-MLC"/>
                             <constraint firstItem="FWM-8y-IbT" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="mqd-ua-xjZ"/>
                             <constraint firstItem="oGX-8t-s3A" firstAttribute="top" secondItem="bDT-yL-426" secondAttribute="bottom" constant="20" id="rxq-Dx-xHe"/>
                         </constraints>
@@ -74,6 +82,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="bhj-oj-UzW"/>
                     <connections>
+                        <outlet property="errorLabel" destination="D2P-Rt-SQw" id="WEk-3L-KES"/>
                         <outlet property="textField" destination="lKo-Gc-bIU" id="Ovz-qy-lYm"/>
                         <outlet property="userNameField" destination="zG9-cQ-bb8" id="xMC-UB-f7N"/>
                         <segue destination="iGK-pC-BTI" kind="show" identifier="ShowChatList" id="blT-ie-n0u"/>

@@ -2,6 +2,7 @@
 
 import UIKit
 import FirebaseDatabase
+import FirebaseAuth
 
 
 protocol ChatListDataSource {
@@ -30,6 +31,9 @@ class ChatsTableViewController: UITableViewController, ChatListDataDelegate {
         self.tableView.tableFooterView = UIView()
         let userId = UserDefaults.standard.string(forKey: Constants.userIdKey)
         self.dataSource = FirebaseChatListHelper(userId: userId!, delegate: self)
+
+        let rightButton = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(logout))
+        self.navigationItem.rightBarButtonItem = rightButton
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -66,6 +70,19 @@ class ChatsTableViewController: UITableViewController, ChatListDataDelegate {
             self.conversations.insert(convo, at: 0)
 
             self.tableView.reloadData()
+        }
+    }
+
+    @objc func logout() {
+        do {
+            try Auth.auth().signOut()
+            
+            UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
+            UserDefaults.standard.synchronize()
+
+            self.navigationController!.popViewController(animated: true)
+        } catch {
+            print("failed to sign out")
         }
     }
     

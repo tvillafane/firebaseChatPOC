@@ -2,6 +2,7 @@
 import Foundation
 import Firebase
 import FirebaseDatabase
+import FirebaseAuth
 
 class FirebaseChatHelper: ChatDataSource {
     var reference: DatabaseReference!
@@ -38,7 +39,7 @@ class FirebaseChatHelper: ChatDataSource {
         let senderId = UserDefaults.standard.string(forKey: Constants.userIdKey)!
 
         let messageData = [
-            Constants.senderKey: senderId,
+            Constants.senderKey: "u_\(senderId)",
             Constants.messageBodyKey: body,
             Constants.sentAtKey: "\(Int(Date().timeIntervalSince1970))",
             Constants.typeKey: "string"

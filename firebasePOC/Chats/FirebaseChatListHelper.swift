@@ -2,6 +2,7 @@
 import Foundation
 import Firebase
 import FirebaseDatabase
+import FirebaseAuth
 
 class FirebaseChatListHelper: ChatListDataSource {
     var delegate: ChatListDataDelegate

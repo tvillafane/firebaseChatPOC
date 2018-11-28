@@ -7,7 +7,7 @@ target 'firebasePOC' do
 
   # Pods for firebasePOC
     pod 'Firebase/Core'
-    pod 'Firebase/Firestore'
+    pod 'Firebase/Auth'
     pod 'Firebase/Database'
 
 end

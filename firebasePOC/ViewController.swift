@@ -12,7 +12,7 @@ class ViewController: UIViewController {
         self.navigationItem.title = "Sign in"
 
         //  lel
-        if let userId = UserDefaults.standard.string(forKey: Constants.userIdKey) {
+        if let _ = UserDefaults.standard.string(forKey: Constants.userIdKey) {
             self.performSegue(withIdentifier: "ShowChatList", sender: nil)
         }
     }

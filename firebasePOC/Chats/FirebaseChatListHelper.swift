@@ -16,7 +16,7 @@ class FirebaseChatListHelper: ChatListDataSource {
     }
 
     func listenForNewMessages() {
-        let messageRef = Database.database().reference().child("users").child("user_\(self.userId)").child("connections")
+        let messageRef = Database.database().reference().child("users").child("u_\(self.userId)").child("connections")
 
         messageRef.observe(.childChanged) { (snapShot) in
             if
@@ -24,7 +24,7 @@ class FirebaseChatListHelper: ChatListDataSource {
                 let messageBody = lastMessage[Constants.messageBodyKey] as? String,
                 let sender = lastMessage[Constants.senderKey] as? String
             {
-                let convoId = snapShot.key.replacingOccurrences(of: "connection_", with: "", options: .literal, range: nil)
+                let convoId = snapShot.key.replacingOccurrences(of: "c_", with: "", options: .literal, range: nil)
                 let message = Message(body: messageBody, senderId: "\(sender)", sentAt: Date())
                 self.delegate.newMessageReceived(message, connectionId: convoId)
             }
@@ -32,18 +32,18 @@ class FirebaseChatListHelper: ChatListDataSource {
     }
 
     func listenForNewConversations() {
-        let convoRef = Database.database().reference().child("users").child("user_\(self.userId)").child("connections")
+        let convoRef = Database.database().reference().child("users").child("u_\(self.userId)").child("connections")
 
         convoRef.observe(.childAdded) { (snapShot) in
             if
                 let lastMessage = snapShot.childSnapshot(forPath: Constants.lastMessageKey).value as? NSDictionary,
                 let messageBody = lastMessage[Constants.messageBodyKey] as? String,
                 let sender = lastMessage[Constants.senderKey] as? String {
-                let message = Message(body: messageBody, senderId: "\(sender)", sentAt: Date())
-                let backendId = snapShot.key.replacingOccurrences(of: "connection_", with: "", options: .literal, range: nil)
-                let convo = Conversation(backendId: backendId, lastMessage: message)
+                    let message = Message(body: messageBody, senderId: "\(sender)", sentAt: Date())
+                    let backendId = snapShot.key.replacingOccurrences(of: "c_", with: "", options: .literal, range: nil)
+                    let convo = Conversation(backendId: backendId, lastMessage: message)
 
-                self.delegate.newConversationReceived(convo)
+                    self.delegate.newConversationReceived(convo)
             }
         }
     }

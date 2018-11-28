@@ -10,7 +10,7 @@ class FirebaseChatHelper: ChatDataSource {
         self.chatId = chatId
         self.delegate = delegate
 
-        self.reference = Database.database().reference().child("messages").child("connection_\(self.chatId)")
+        self.reference = Database.database().reference().child("connections").child("\(self.chatId)/messages")
         self.listenForNewMessages()
     }
 
@@ -35,12 +35,13 @@ class FirebaseChatHelper: ChatDataSource {
     }
 
     func writeMessage(body: String, completion: @escaping (Bool) -> ()) {
-        let username = UserDefaults.standard.string(forKey: Constants.userNameKey)!
+        let senderId = UserDefaults.standard.string(forKey: Constants.userIdKey)!
 
         let messageData = [
-            Constants.senderKey: username,
+            Constants.senderKey: senderId,
             Constants.messageBodyKey: body,
-            Constants.sentAtKey: "\(Int(Date().timeIntervalSince1970))"
+            Constants.sentAtKey: "\(Int(Date().timeIntervalSince1970))",
+            Constants.typeKey: "string"
         ]
 
         self.reference.childByAutoId().setValue(messageData) { (err, ref) in

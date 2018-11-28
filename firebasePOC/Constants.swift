@@ -7,8 +7,9 @@ struct Constants {
     //  messages
     static let lastMessageKey = "last_message"
     static let messageBodyKey = "body"
-    static let senderKey = "sender_id"
-    static let sentAtKey = "sent_at"
+    static let senderKey = "s_id"
+    static let sentAtKey = "sent"
+    static let typeKey = "type"
 }
 
 class User {

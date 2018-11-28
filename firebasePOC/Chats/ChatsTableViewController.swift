@@ -65,7 +65,7 @@ class ChatsTableViewController: UITableViewController, ChatListDataDelegate {
             self.conversations.remove(at: index)
             self.conversations.insert(convo, at: 0)
 
-            self.updateTable()
+            self.tableView.reloadData()
         }
     }
     

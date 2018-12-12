@@ -9,6 +9,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var textField: UITextField!
 
     @IBOutlet weak var userNameField: UITextField!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "Sign in"
@@ -36,7 +37,6 @@ class ViewController: UIViewController {
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
 
-        //create dataTask using the session object to send data to the server
         let task = URLSession.shared.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
 
             if error != nil || data == nil {

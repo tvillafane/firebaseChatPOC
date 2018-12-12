@@ -6,6 +6,7 @@ protocol ChatDataSource {
     init (chatId: String, delegate: ChatDataDelegate)
     var delegate: ChatDataDelegate { get }
     func writeMessage(body: String, completion: @escaping (Bool) -> ())
+    func syncConversation(chatId: String, timestamp: Int?, completion: @escaping (Conversation) -> ())
 }
 
 protocol ChatDataDelegate {
@@ -32,11 +33,17 @@ class ChatTableViewController: UIViewController, UITableViewDataSource, UITableV
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
 
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+
+        self.dataSource.syncConversation(chatId: self.conversation.backendId, timestamp: nil) { (convo) in
+            print(convo)
+        }
     }
 
     @IBAction func sendMessage(_ sender: Any) {
         if let text = self.textfield.text {
             self.dataSource.writeMessage(body: text, completion: { [weak self] (success) in
+                print("attempted to do things:", success)
+
                 if success {
                     self?.textfield.text = ""
                 }
